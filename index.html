@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Analytics Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="navbar-brand">HR Analytics</a>
+            <ul class="navbar-nav">
+                <li><a href="prediction.html" class="nav-link">Predict Applications</a></li>
+                <li><a href="matching.html" class="nav-link">Match Resumes</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <h1 class="text-gradient">HR Analytics Platform</h1>
+            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto var(--spacing-xl);">
+                Leverage AI and machine learning to optimize your hiring process, predict application volumes, and match candidates with precision.
+            </p>
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: var(--spacing-xl);">
+        <div class="grid grid-3">
+            <!-- Application Prediction Card -->
+            <div class="card fade-in" style="animation-delay: 0.1s;">
+                <div class="card-header">
+                    <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">📊</div>
+                    <h3 class="card-title">Application Volume Prediction</h3>
+                    <p class="card-subtitle">Predict expected job applications using ML</p>
+                </div>
+                <p>Input job parameters and get AI-powered predictions on application volume. Helps HR teams plan screening capacity and recruiter workload.</p>
+                <ul style="list-style: none; margin: var(--spacing-md) 0;">
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Predict application count</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Categorize hiring difficulty</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Get actionable insights</li>
+                </ul>
+                <a href="prediction.html" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-md);">
+                    Start Predicting →
+                </a>
+            </div>
+
+            <!-- Resume Matching Card -->
+            <div class="card fade-in" style="animation-delay: 0.2s;">
+                <div class="card-header">
+                    <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">🎯</div>
+                    <h3 class="card-title">Resume Matching & Filtering</h3>
+                    <p class="card-subtitle">AI-powered candidate evaluation</p>
+                </div>
+                <p>Upload resumes and job descriptions to get instant matching scores. Automate resume shortlisting and reduce manual screening effort.</p>
+                <ul style="list-style: none; margin: var(--spacing-md) 0;">
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Match score (0-100%)</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Identify matched skills</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Highlight skill gaps</li>
+                </ul>
+                <a href="matching.html" class="btn btn-secondary" style="width: 100%; margin-top: var(--spacing-md);">
+                    Match Resumes →
+                </a>
+            </div>
+
+            <!-- Dashboard Card -->
+            <div class="card fade-in" style="animation-delay: 0.3s;">
+                <div class="card-header">
+                    <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">📈</div>
+                    <h3 class="card-title">HR Dashboard</h3>
+                    <p class="card-subtitle">Comprehensive hiring insights</p>
+                </div>
+                <p>View aggregated analytics, track predictions, and identify top candidates. Make data-driven hiring decisions with confidence.</p>
+                <ul style="list-style: none; margin: var(--spacing-md) 0;">
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Visual analytics</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Candidate rankings</li>
+                    <li style="margin-bottom: var(--spacing-xs);">✓ Priority indicators</li>
+                </ul>
+                <a href="dashboard.html" class="btn btn-success" style="width: 100%; margin-top: var(--spacing-md);">
+                    View Dashboard →
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="card card-glass mt-4">
+            <h2 class="text-center">Why Choose Our Platform?</h2>
+            <div class="grid grid-2 mt-3">
+                <div style="padding: var(--spacing-md);">
+                    <h4>🤖 AI-Powered</h4>
+                    <p>Advanced machine learning models trained on real hiring data to provide accurate predictions and insights.</p>
+                </div>
+                <div style="padding: var(--spacing-md);">
+                    <h4>⚡ Fast & Efficient</h4>
+                    <p>Get instant results and reduce time-to-hire by automating manual screening processes.</p>
+                </div>
+                <div style="padding: var(--spacing-md);">
+                    <h4>📊 Data-Driven</h4>
+                    <p>Make informed decisions backed by analytics and predictive insights.</p>
+                </div>
+                <div style="padding: var(--spacing-md);">
+                    <h4>🎯 Accurate Matching</h4>
+                    <p>NLP-based resume matching identifies the best candidates for your open positions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--bg-secondary); padding: var(--spacing-lg) 0; text-align: center; margin-top: var(--spacing-xl);">
+        <div class="container">
+            <p style="color: var(--text-muted);">© 2026 HR Analytics Platform. Powered by Machine Learning.</p>
+        </div>
+    </footer>
+</body>
+</html>

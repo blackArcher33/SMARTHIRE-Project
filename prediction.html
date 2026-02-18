@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Volume Prediction - HR Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="navbar-brand">HR Analytics</a>
+            <ul class="navbar-nav">
+                <li><a href="prediction.html" class="nav-link"
+                        style="background: rgba(99, 102, 241, 0.1); color: var(--text-primary);">Predict
+                        Applications</a></li>
+                <li><a href="matching.html" class="nav-link">Match Resumes</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: var(--spacing-xl) 0;">
+        <div class="text-center mb-4">
+            <h1 class="text-gradient">Application Volume Prediction</h1>
+            <p style="font-size: 1.125rem; color: var(--text-secondary);">
+                Predict how many applications your job posting will receive
+            </p>
+        </div>
+
+        <div class="grid grid-2">
+            <!-- Input Form -->
+            <div class="card">
+                <h3 class="card-title">Job Details</h3>
+                <form id="predictionForm">
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" id="jobTitle" class="form-input" placeholder="e.g., Senior Software Engineer"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Required Skills (comma-separated)</label>
+                        <input type="text" id="skills" class="form-input"
+                            placeholder="e.g., Python, Machine Learning, AWS" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Experience Level</label>
+                        <select id="experienceLevel" class="form-select" required>
+                            <option value="Entry">Entry Level</option>
+                            <option value="Mid" selected>Mid Level</option>
+                            <option value="Senior">Senior Level</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Min Salary ($)</label>
+                            <input type="number" id="minSalary" class="form-input" placeholder="80000" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Max Salary ($)</label>
+                            <input type="number" id="maxSalary" class="form-input" placeholder="120000" min="0"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Job Type</label>
+                        <select id="jobType" class="form-select" required>
+                            <option value="Full-time" selected>Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Remote Option</label>
+                        <select id="remoteOption" class="form-select" required>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company Size</label>
+                        <select id="companySize" class="form-select" required>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-500" selected>201-500 employees</option>
+                            <option value="501-1000">501-1000 employees</option>
+                            <option value="1001-5000">1001-5000 employees</option>
+                            <option value="5000+">5000+ employees</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Industry</label>
+                        <select id="industry" class="form-select" required>
+                            <option value="Technology" selected>Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Education">Education</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="predictBtn">
+                        <span id="btnText">Predict Applications</span>
+                        <span id="btnLoading" class="loading" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="card" id="resultsPanel" style="display: none;">
+                <h3 class="card-title">Prediction Results</h3>
+
+                <div class="text-center" style="padding: var(--spacing-lg) 0;">
+                    <div style="font-size: 4rem; font-weight: 700; margin-bottom: var(--spacing-sm);"
+                        id="predictionCount">
+                        --
+                    </div>
+                    <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                        Expected Applications
+                    </p>
+                    <div id="categoryBadge"></div>
+                </div>
+
+                <div
+                    style="background: var(--bg-tertiary); padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                    <h5 style="margin-bottom: var(--spacing-sm);">Hiring Difficulty</h5>
+                    <div id="difficultyBadge"></div>
+                </div>
+
+                <div
+                    style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+                    <h5 style="margin-bottom: var(--spacing-sm);">💡 Insights</h5>
+                    <p id="explanation" style="margin: 0; color: var(--text-secondary);"></p>
+                </div>
+
+                <button class="btn btn-outline" style="width: 100%; margin-top: var(--spacing-md);"
+                    onclick="resetForm()">
+                    Make Another Prediction
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const formData = {
+                jobTitle: document.getElementById('jobTitle').value,
+                skills: document.getElementById('skills').value.split(',').map(s => s.trim()),
+                experienceLevel: document.getElementById('experienceLevel').value,
+                minSalary: parseFloat(document.getElementById('minSalary').value),
+                maxSalary: parseFloat(document.getElementById('maxSalary').value),
+                jobType: document.getElementById('jobType').value,
+                remoteOption: document.getElementById('remoteOption').value === 'true',
+                companySize: document.getElementById('companySize').value,
+                industry: document.getElementById('industry').value
+            };
+
+            // Show loading state
+            const btn = document.getElementById('predictBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+
+            try {
+                const response = await fetch(`${API_URL}/predict-applications`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.prediction);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Failed to connect to server. Make sure the backend is running.');
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            }
+        });
+
+        function displayResults(prediction) {
+            // Show results panel
+            document.getElementById('resultsPanel').style.display = 'block';
+            document.getElementById('resultsPanel').classList.add('fade-in');
+
+            // Display count
+            document.getElementById('predictionCount').textContent = prediction.count;
+
+            // Display category badge
+            const categoryColors = {
+                'Low': 'danger',
+                'Medium': 'warning',
+                'High': 'success'
+            };
+            const categoryBadge = document.getElementById('categoryBadge');
+            categoryBadge.innerHTML = `<span class="badge badge-${categoryColors[prediction.category]}" style="font-size: 1rem; padding: 0.5rem 1.5rem;">${prediction.category} Volume</span>`;
+
+            // Display difficulty badge
+            const difficultyColors = {
+                'Easy': 'success',
+                'Medium': 'warning',
+                'Hard': 'danger'
+            };
+            const difficultyBadge = document.getElementById('difficultyBadge');
+            difficultyBadge.innerHTML = `<span class="badge badge-${difficultyColors[prediction.difficulty]}" style="font-size: 1rem; padding: 0.5rem 1.5rem;">${prediction.difficulty} to Fill</span>`;
+
+            // Display explanation
+            document.getElementById('explanation').textContent = prediction.explanation;
+
+            // Scroll to results
+            document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetForm() {
+            document.getElementById('predictionForm').reset();
+            document.getElementById('resultsPanel').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
