@@ -41,7 +41,7 @@ A comprehensive HR analytics platform powered by machine learning to optimize hi
 
 1. **Install Python dependencies:**
 ```bash
-cd "C:\Users\piyush madhukar\Downloads\colab"
+cd "C:\Users\Udit\Downloads\colab"
 pip install -r requirements.txt
 ```
 
